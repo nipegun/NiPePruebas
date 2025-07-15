@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import subprocess
 from flask import Flask, jsonify, request
 from importlib import import_module

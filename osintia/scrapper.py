@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
+
 from fastapi import FastAPI, HTTPException
 from fastapi_mcp import FastApiMCP
 from pydantic import BaseModel
 from scrapegraphai.graphs import SmartScraperGraph
-from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatOllama
 import asyncio
 
 app = FastAPI()
@@ -10,12 +12,11 @@ mcp = FastApiMCP(app)
 mcp.mount()
 
 instance_config = {
-    "model": "google/gemini-2.5-flash-preview-05-20",
-    "openai_api_base": "https://openrouter.ai/api/v1",
-    "api_key": "sk-or-v1-"
+    "model": "llama3",
+    "base_url": "http://localhost:11434"
 }
 
-llm_model_instance = ChatOpenAI(**instance_config)
+llm_model_instance = ChatOllama(**instance_config)
 
 graph_config = {
     "llm": {
