@@ -1,1 +1,1 @@
-<script>alert("NiPeGun");</script>
+<script>alert("test");</script>
