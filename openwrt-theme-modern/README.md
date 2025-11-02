@@ -70,6 +70,45 @@ uci commit luci
 /etc/init.d/uhttpd restart
 ```
 
+## Instalación directa desde la línea de comandos del router
+
+Si ya cuentas con el firmware OpenWrt instalado y únicamente deseas añadir el theme en un router en producción, puedes realizar todo el proceso desde la shell del dispositivo siguiendo estos pasos:
+
+1. Conéctate por SSH al router y asegúrate de tener conectividad a Internet para descargar el paquete:
+
+   ```sh
+   ssh root@192.168.1.1
+   opkg update
+   ```
+
+2. Descarga el paquete `.ipk` publicado (sustituye la URL por la versión más reciente de tus artefactos). Si prefieres copiarlo manualmente, también puedes usar `scp` desde tu equipo de desarrollo.
+
+   ```sh
+   # Ejemplo usando wget desde el router
+   cd /tmp
+   wget https://tu-servidor/paquetes/luci-theme-modern_1.0.0_all.ipk
+
+   # Alternativa desde tu PC:
+   scp luci-theme-modern_1.0.0_all.ipk root@192.168.1.1:/tmp/
+   ```
+
+3. Instala el paquete y limpia el archivo temporal una vez finalizado:
+
+   ```sh
+   opkg install /tmp/luci-theme-modern_1.0.0_all.ipk
+   rm /tmp/luci-theme-modern_1.0.0_all.ipk
+   ```
+
+4. Configura el theme como predeterminado y reinicia el servidor web para aplicar los cambios:
+
+   ```sh
+   uci set luci.main.mediaurlbase='/luci-static/modern'
+   uci commit luci
+   /etc/init.d/uhttpd restart
+   ```
+
+5. Si deseas volver al theme anterior, restaura el valor previo (por ejemplo `/luci-static/bootstrap`) y reinicia de nuevo `uhttpd`.
+
 ## Personalización
 
 - Ajusta variables CSS en `:root` para cambiar paleta y tipografía.
