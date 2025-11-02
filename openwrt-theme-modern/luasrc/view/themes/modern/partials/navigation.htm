@@ -1,0 +1,40 @@
+<nav class="sidebar-nav" aria-label="Main navigation">
+  <div class="sidebar-section">
+    <p class="sidebar-section__title"><%= translate("Navegación") %></p>
+    <ul class="sidebar-menu">
+      <% local tree = luci.dispatcher.node() %>
+      <% if tree and tree.children then %>
+        <% for name, node in luci.util.kspairs(tree.children) do %>
+          <% if node.title and node.target ~= "firstchild" then %>
+            <li class="sidebar-menu__item <%= (node == luci.dispatcher.context.path[#luci.dispatcher.context.path]) and 'is-active' or '' %>">
+              <a href="<%= luci.dispatcher.build_url(unpack(node.path)) %>">
+                <span class="icon icon-circle" aria-hidden="true"></span>
+                <span><%= node.title %></span>
+              </a>
+            </li>
+          <% end %>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="sidebar-section sidebar-section--status">
+    <p class="sidebar-section__title"><%= translate("Estado del sistema") %></p>
+    <ul class="sidebar-status">
+      <li>
+        <span class="status-label"><%= translate("Tiempo activo") %></span>
+        <span class="status-value"><%= luci.util.trim(luci.sys.exec('uptime -p')) or '-' %></span>
+      </li>
+      <li>
+        <span class="status-label"><%= translate("Carga") %></span>
+        <span class="status-value"><%= luci.sys.loadavg() and table.concat(luci.sys.loadavg(), ' / ') or '-' %></span>
+      </li>
+      <li>
+        <span class="status-label"><%= translate("Memoria libre") %></span>
+        <span class="status-value">
+          <% local meminfo = luci.sys.exec("free -m | awk '/Mem:/ {printf \"%s MB\", $4}'") %>
+          <%= luci.util.trim(meminfo) or '-' %>
+        </span>
+      </li>
+    </ul>
+  </div>
+</nav>

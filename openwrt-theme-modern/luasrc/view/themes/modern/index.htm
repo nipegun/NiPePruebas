@@ -1,0 +1,43 @@
+<%+themes/modern/header%>
+<div class="view-shell">
+  <% local function render(item)
+      if type(item) == 'table' then
+        if item.title or item.content then
+  %>
+          <section class="panel-card">
+            <% if item.title then %>
+              <header class="panel-card__header">
+                <h2><%= item.title %></h2>
+                <% if item.actions then %>
+                  <div class="panel-card__actions"><%= item.actions %></div>
+                <% end %>
+              </header>
+            <% end %>
+            <div class="panel-card__body">
+              <%= item.content or '' %>
+            </div>
+          </section>
+  <%   else
+          for _, nested in ipairs(item) do render(nested) end
+        end
+      else %>
+        <section class="panel-card">
+          <div class="panel-card__body"><%= item or '' %></div>
+        </section>
+  <% end end %>
+
+  <% if content then
+      if type(content) == 'table' then
+        for _, block in ipairs(content) do render(block) end
+      else
+        render(content)
+      end
+    else %>
+    <section class="panel-card">
+      <div class="panel-card__body">
+        <p><%= translate("No hay contenido para mostrar.") %></p>
+      </div>
+    </section>
+  <% end %>
+</div>
+<%+themes/modern/footer%>

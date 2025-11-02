@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="<%= luci.i18n.context.lang %>">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= translate("Iniciar sesión") %> — OpenWrt</title>
+  <link rel="stylesheet" href="<%=media%>/css/style.css?v=1.0.0" />
+  <script defer src="<%=media%>/js/theme.js?v=1.0.0"></script>
+</head>
+<body class="theme-modern login-page">
+  <main class="login-shell">
+    <section class="login-card">
+      <header class="login-card__header">
+        <h1>OpenWrt</h1>
+        <p><%= translate("Panel de administración") %></p>
+      </header>
+      <form class="login-card__form" method="post" action="<%=url('login')%>">
+        <div class="form-field">
+          <label for="username"><%= translate("Usuario") %></label>
+          <input id="username" name="username" type="text" autocomplete="username" required />
+        </div>
+        <div class="form-field">
+          <label for="password"><%= translate("Contraseña") %></label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </div>
+        <% if fuser then %>
+          <p class="form-error"><%= translate("Inicio de sesión fallido") %></p>
+        <% end %>
+        <button class="button button--primary" type="submit"><%= translate("Acceder") %></button>
+      </form>
+      <footer class="login-card__footer">
+        <small>&copy; <%= os.date('%Y') %> OpenWrt Project</small>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>

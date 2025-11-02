@@ -1,0 +1,6 @@
+#!/bin/sh
+uci -q batch <<'EOT'
+set luci.main.mediaurlbase='/luci-static/modern'
+commit luci
+EOT
+exit 0

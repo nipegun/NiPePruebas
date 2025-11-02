@@ -1,0 +1,40 @@
+<%+header%>
+<!DOCTYPE html>
+<html lang="<%= luci.i18n.context.lang %>">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= luci.dispatcher.context.title or 'LuCI' %> — OpenWrt</title>
+  <link rel="stylesheet" href="<%=media%>/css/style.css?v=1.0.0" />
+  <script defer src="<%=media%>/js/theme.js?v=1.0.0"></script>
+</head>
+<%
+  local page_path = luci.dispatcher.context.path or {}
+  local page_name = table.concat(page_path, '/')
+%>
+<body class="theme-modern" data-luci-page="<%= page_name %>">
+  <header class="app-header">
+    <div class="brand">
+      <button class="icon-button" id="sidebarToggle" aria-label="Toggle navigation">
+        <span class="icon icon-menu" aria-hidden="true"></span>
+      </button>
+      <span class="brand-title">OpenWrt</span>
+      <span class="brand-subtitle"><%= luci.dispatcher.context.title or translate("Panel") %></span>
+    </div>
+    <div class="header-actions">
+      <button class="icon-button" id="colorScheme" aria-label="Toggle color scheme">
+        <span class="icon icon-sun" aria-hidden="true"></span>
+      </button>
+      <div class="user-menu" role="presentation">
+        <span class="user-avatar" aria-hidden="true">⚙️</span>
+        <span class="user-name"><%= luci.dispatcher.context.authuser or 'root' %></span>
+      </div>
+    </div>
+  </header>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="sidebar">
+      <%+themes/modern/partials/navigation%>
+    </aside>
+    <main class="app-main" id="main-content">
+      <div class="main-inner">
