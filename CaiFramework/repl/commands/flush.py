@@ -62,7 +62,7 @@ class FlushCommand(Command):
         current_agent = os.getenv("CAI_CURRENT_AGENT", "Current Agent")
 
         try:
-            from cai.sdk.agents.models.openai_chatcompletions import (
+            from cai.sdk.agents.models.chatcompletions import (
                 clear_agent_history,
                 get_agent_message_history,
             )
@@ -107,7 +107,7 @@ class FlushCommand(Command):
     def handle_all(self, args: Optional[List[str]] = None) -> bool:
         """Clear history for all agents."""
         try:
-            from cai.sdk.agents.models.openai_chatcompletions import (
+            from cai.sdk.agents.models.chatcompletions import (
                 clear_all_histories,
                 get_all_agent_histories,
                 ACTIVE_MODEL_INSTANCES,
@@ -187,7 +187,7 @@ class FlushCommand(Command):
         if identifier.upper().startswith("P") and len(identifier) >= 2 and identifier[1:].isdigit():
             # Clear by ID directly for parallel agents
             from cai.sdk.agents.parallel_isolation import PARALLEL_ISOLATION
-            from cai.sdk.agents.models.openai_chatcompletions import ACTIVE_MODEL_INSTANCES
+            from cai.sdk.agents.models.chatcompletions import ACTIVE_MODEL_INSTANCES
             
             agent_id = identifier.upper()
             
@@ -268,7 +268,7 @@ class FlushCommand(Command):
     def _clear_agent(self, agent_name: str) -> bool:
         """Common method to clear a specific agent's history."""
         try:
-            from cai.sdk.agents.models.openai_chatcompletions import (
+            from cai.sdk.agents.models.chatcompletions import (
                 clear_agent_history,
                 get_agent_message_history,
                 ACTIVE_MODEL_INSTANCES,
@@ -368,7 +368,7 @@ class FlushCommand(Command):
     def show_flush_help(self) -> bool:
         """Show help menu with available agents to flush."""
         try:
-            from cai.sdk.agents.models.openai_chatcompletions import get_all_agent_histories
+            from cai.sdk.agents.models.chatcompletions import get_all_agent_histories
         except ImportError:
             console.print("[red]Error: Could not access conversation history[/red]")
             return False

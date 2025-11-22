@@ -1,8 +1,8 @@
 """Reporter Agent - Creates professional security assessment reports"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
-from openai import AsyncOpenAI
+from cai.sdk.agents import Agent  # pylint: disable=import-error
+from cai.sdk.agents.models.ollama_provider import OllamaProvider
 from cai.util import load_prompt_template  # Add this import
 
 from cai.tools.reconnaissance.generic_linux_command import (  # pylint: disable=import-error # noqa: E501
@@ -30,7 +30,7 @@ reporting_agent = Agent(
     instructions=reporting_agent_system_prompt,
     description="""Agent that generates reports in html.""",
     tools=functions,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
         openai_client=AsyncOpenAI(),
     )

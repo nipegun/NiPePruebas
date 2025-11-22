@@ -1,8 +1,8 @@
 """Memory Analysis and Manipulation Agent"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
-from openai import AsyncOpenAI
+from cai.sdk.agents import Agent  # pylint: disable=import-error
+from cai.sdk.agents.models.ollama_provider import OllamaProvider
 from cai.util import load_prompt_template  # Add this import
 from cai.tools.command_and_control.sshpass import (  # pylint: disable=import-error # noqa: E501
     run_ssh_command_with_credentials
@@ -42,7 +42,7 @@ memory_analysis_agent = Agent(
                    Specializes in process memory examination, monitoring, and modification
                    for security assessment, vulnerability discovery, and runtime behavior analysis.""",
     tools=functions,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
         openai_client=AsyncOpenAI(),
     )

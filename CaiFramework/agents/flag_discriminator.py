@@ -2,15 +2,11 @@
 CTF Flag Discriminator Agent with test
 """
 import os
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel, handoff
-from openai import AsyncOpenAI
+from cai.sdk.agents import Agent, handoff
+from cai.sdk.agents.models.ollama_provider import OllamaProvider
 from cai.agents.one_tool import one_tool_agent
 
-model = os.getenv('CAI_MODEL', "alias0")
-
-# Create OpenAI client with fallback API key to prevent initialization errors
-# The actual API key should be set in environment variables or .env file
-api_key = os.getenv('OPENAI_API_KEY', 'sk-placeholder-key-for-local-models')
+model = os.getenv('CAI_MODEL', "llama3.2")
 
 flag_discriminator = Agent(
     name="Flag discriminator",
@@ -21,10 +17,7 @@ flag_discriminator = Agent(
                 3. Flags can be in any format (not always CTF{...}).
                 4. If you do not find a flag, call `ctf_agent` to continue investigating.
                 """,
-    model=OpenAIChatCompletionsModel(
-        model="alias0" if os.getenv('CAI_MODEL') == "o3-mini" else model,
-        openai_client=AsyncOpenAI(api_key=api_key),
-    ),
+    model=OllamaProvider(model_name=model).get_model(),
     handoffs=[
         handoff(
             agent=one_tool_agent,

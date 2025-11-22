@@ -13,7 +13,7 @@ from rich.table import Table  # pylint: disable=import-error
 
 from cai.repl.commands.base import Command, register_command
 from cai.repl.commands.parallel import PARALLEL_CONFIGS
-from cai.sdk.agents.models.openai_chatcompletions import (
+from cai.sdk.agents.models.chatcompletions import (
     get_agent_message_history,
     get_all_agent_histories,
 )
@@ -370,7 +370,7 @@ class LoadCommand(Command):
                         # Load these messages into the agent's history with the correct instance name
                         # CRITICAL: We need to get the actual model instance to add messages properly
                         # Using get_agent_message_history() and appending won't work as it returns a copy
-                        from cai.sdk.agents.models.openai_chatcompletions import ACTIVE_MODEL_INSTANCES
+                        from cai.sdk.agents.models.chatcompletions import ACTIVE_MODEL_INSTANCES
                         
                         # Find the matching model instance
                         model_instance = None
@@ -414,7 +414,7 @@ class LoadCommand(Command):
                                     model_instance.add_to_message_history(msg)
                             else:
                                 # No active instance, store in persistent history
-                                from cai.sdk.agents.models.openai_chatcompletions import PERSISTENT_MESSAGE_HISTORIES
+                                from cai.sdk.agents.models.chatcompletions import PERSISTENT_MESSAGE_HISTORIES
                                 PERSISTENT_MESSAGE_HISTORIES[instance_name] = list(agent_conversations[best_match])
                                 
                                 # CRITICAL: Also update AGENT_MANAGER to ensure consistency
@@ -510,7 +510,7 @@ class LoadCommand(Command):
             console.print(f"[cyan]Merging {len(messages)} messages into {len(all_histories)} active agent(s)...[/cyan]")
             
             # Merge messages into all active agents with duplicate control
-            from cai.sdk.agents.models.openai_chatcompletions import ACTIVE_MODEL_INSTANCES, PERSISTENT_MESSAGE_HISTORIES
+            from cai.sdk.agents.models.chatcompletions import ACTIVE_MODEL_INSTANCES, PERSISTENT_MESSAGE_HISTORIES
             from cai.repl.commands.parallel import ParallelCommand
             
             # Create a ParallelCommand instance to use its merge methods
@@ -695,7 +695,7 @@ class LoadCommand(Command):
                     return False
             
             # Merge messages into the specified agent's history with duplicate control
-            from cai.sdk.agents.models.openai_chatcompletions import ACTIVE_MODEL_INSTANCES, PERSISTENT_MESSAGE_HISTORIES
+            from cai.sdk.agents.models.chatcompletions import ACTIVE_MODEL_INSTANCES, PERSISTENT_MESSAGE_HISTORIES
             from cai.repl.commands.parallel import ParallelCommand
             
             # Get the current history for this agent
@@ -913,7 +913,7 @@ class LoadCommand(Command):
             
             # Load the same messages into each parallel agent
             from cai.agents import get_available_agents
-            from cai.sdk.agents.models.openai_chatcompletions import ACTIVE_MODEL_INSTANCES, PERSISTENT_MESSAGE_HISTORIES
+            from cai.sdk.agents.models.chatcompletions import ACTIVE_MODEL_INSTANCES, PERSISTENT_MESSAGE_HISTORIES
             from cai.sdk.agents.parallel_isolation import PARALLEL_ISOLATION
             
             available_agents = get_available_agents()

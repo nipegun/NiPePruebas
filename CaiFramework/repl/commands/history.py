@@ -66,7 +66,7 @@ class HistoryCommand(Command):
     def handle_control_panel(self) -> bool:
         """Show a control panel view of all agents and their message counts."""
         try:
-            from cai.sdk.agents.models.openai_chatcompletions import get_all_agent_histories
+            from cai.sdk.agents.models.chatcompletions import get_all_agent_histories
             from cai.sdk.agents.simple_agent_manager import AGENT_MANAGER
             from cai.repl.commands.parallel import PARALLEL_CONFIGS
             from cai.agents import get_available_agents

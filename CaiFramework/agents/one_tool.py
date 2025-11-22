@@ -2,25 +2,14 @@
 CTF Agent with one tool
 """
 import os
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent
 from cai.tools.reconnaissance.generic_linux_command import generic_linux_command  # noqa
-from openai import AsyncOpenAI
+from cai.sdk.agents.models.ollama_provider import OllamaProvider
 from cai.util import create_system_prompt_renderer
 from cai.agents.guardrails import get_security_guardrails
 
 # Get model from environment or use default
-model_name = os.getenv('CAI_MODEL', "alias0")
-
-# NOTE: This is needed when using LiteLLM Proxy Server
-#
-# # Create OpenAI client for the agent
-# openai_client = AsyncOpenAI(
-#     base_url = os.getenv('LITELLM_BASE_URL', 'http://localhost:4000'),
-#     api_key=os.getenv('LITELLM_API_KEY', 'key')
-# )
-
-# # Check if we're using a Qwen model
-# is_qwen = "qwen" in model_name.lower()
+model_name = os.getenv('CAI_MODEL', "llama3.2")
 
 # For Qwen models, we need to skip system instructions as they're not supported
 instructions = """You are a Cybersecurity expert Leader facing a CTF
@@ -52,9 +41,6 @@ instructions = """You are a Cybersecurity expert Leader facing a CTF
 
                 """
 
-#Loaded in openaichatcompletion client
-api_key = os.getenv('OPENAI_API_KEY', 'sk-placeholder-key-for-local-models')
-
 # Get security guardrails for this high-risk agent
 input_guardrails, output_guardrails = get_security_guardrails()
 
@@ -68,10 +54,7 @@ one_tool_agent = Agent(
     ],
     input_guardrails=input_guardrails,
     output_guardrails=output_guardrails,
-    model=OpenAIChatCompletionsModel(
-        model=model_name,
-        openai_client=AsyncOpenAI(api_key=api_key),
-    )
+    model=OllamaProvider(model_name=model_name).get_model()
 )
 
 

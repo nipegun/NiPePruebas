@@ -22,8 +22,8 @@ from cai.agents import get_available_agents
 
 # Local imports
 from cai.repl.commands.base import Command, register_command
-from cai.sdk.agents.models.openai_chatcompletions import (
-    OpenAIChatCompletionsModel,
+from cai.sdk.agents.models.chatcompletions import (
+    ChatCompletionsModel,
     get_all_agent_histories,
     clear_agent_history,
 )
@@ -1211,7 +1211,7 @@ class ParallelCommand(Command):
             remove_sources: Whether to remove source agents after merging
             source_agents: List of source agent names to remove (if remove_sources is True)
         """
-        from cai.sdk.agents.models.openai_chatcompletions import (
+        from cai.sdk.agents.models.chatcompletions import (
             ACTIVE_MODEL_INSTANCES, 
             PERSISTENT_MESSAGE_HISTORIES
         )
@@ -1336,7 +1336,7 @@ class ParallelCommand(Command):
             merged_history: The merged message history
             original_histories: Original histories before merge (for duplicate detection)
         """
-        from cai.sdk.agents.models.openai_chatcompletions import (
+        from cai.sdk.agents.models.chatcompletions import (
             ACTIVE_MODEL_INSTANCES, 
             PERSISTENT_MESSAGE_HISTORIES
         )

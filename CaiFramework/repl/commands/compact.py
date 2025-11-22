@@ -11,7 +11,7 @@ from rich.table import Table
 from rich.panel import Panel
 
 from cai.repl.commands.base import Command, register_command
-from cai.sdk.agents.models.openai_chatcompletions import get_current_active_model
+from cai.sdk.agents.models.chatcompletions import get_current_active_model
 from cai.util import COST_TRACKER
 from cai.repl.commands.model import (
     ModelCommand, 
@@ -256,7 +256,7 @@ class CompactCommand(Command):
     
     def _ask_and_perform_compaction(self) -> bool:
         """Ask user if they want to compact and perform if confirmed."""
-        from cai.sdk.agents.models.openai_chatcompletions import get_agent_message_history, get_all_agent_histories
+        from cai.sdk.agents.models.chatcompletions import get_agent_message_history, get_all_agent_histories
         from cai.sdk.agents.simple_agent_manager import AGENT_MANAGER
         
         # Try to find an agent with messages
@@ -315,7 +315,7 @@ class CompactCommand(Command):
         """Perform compaction for all parallel agents."""
         from cai.repl.commands.parallel import PARALLEL_CONFIGS
         from cai.sdk.agents.simple_agent_manager import AGENT_MANAGER
-        from cai.sdk.agents.models.openai_chatcompletions import get_agent_message_history
+        from cai.sdk.agents.models.chatcompletions import get_agent_message_history
         from cai.sdk.agents.parallel_isolation import PARALLEL_ISOLATION
         from cai.agents import get_available_agents
         from cai.agents.patterns import get_pattern
@@ -442,7 +442,7 @@ class CompactCommand(Command):
         """
         from cai.repl.commands.memory import MEMORY_COMMAND_INSTANCE
         from cai.sdk.agents.simple_agent_manager import AGENT_MANAGER
-        from cai.sdk.agents.models.openai_chatcompletions import (
+        from cai.sdk.agents.models.chatcompletions import (
             ACTIVE_MODEL_INSTANCES, 
             PERSISTENT_MESSAGE_HISTORIES,
             get_all_agent_histories

@@ -6,9 +6,8 @@ import importlib
 import os
 from typing import Callable, Dict
 
-from openai import AsyncOpenAI
-
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent
+from cai.sdk.agents.models.ollama_provider import OllamaProvider
 from cai.sdk.agents.logger import logger
 
 
@@ -35,28 +34,24 @@ def create_generic_agent_factory(
 
         # Get model configuration - check multiple sources
         model_name = model_override  # First priority: explicit override
-        
+
         if not model_name:
             # Second priority: agent-specific environment variable
             agent_key = agent_var_name.upper()
             model_name = os.getenv(f"CAI_{agent_key}_MODEL")
-        
-        if not model_name:
-            # Third priority: global CAI_MODEL
-            model_name = os.environ.get("CAI_MODEL", "alias0")
-            
-            
-        api_key = os.getenv("OPENAI_API_KEY", "sk-placeholder-key-for-local-models")
 
-        # Create a new model instance with the original agent name
-        # Custom name is only for display purposes, not for the model
-        new_model = OpenAIChatCompletionsModel(
-            model=model_name,
-            openai_client=AsyncOpenAI(api_key=api_key),
-            agent_name=original_agent.name,  # Always use original agent name
-            agent_id=agent_id,
-            agent_type=agent_var_name,  # Pass the agent type for registry
-        )
+        if not model_name:
+            # Third priority: global CAI_MODEL (defaulting to llama3.2 with Ollama)
+            model_name = os.environ.get("CAI_MODEL", "llama3.2")
+
+        # Create Ollama provider and get model instance
+        ollama_provider = OllamaProvider(model_name=model_name)
+        new_model = ollama_provider.get_model()
+
+        # Set agent metadata on the model
+        new_model.agent_name = original_agent.name
+        new_model.agent_id = agent_id
+        new_model.agent_type = agent_var_name
         
         # Mark as parallel agent if running in parallel mode
         parallel_count = int(os.getenv("CAI_PARALLEL", "1"))

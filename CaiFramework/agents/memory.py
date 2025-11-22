@@ -82,7 +82,7 @@ Environment Variables enabling the episodic memory store
 """
 
 import os
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent
 from cai.tools.misc.rag import add_to_memory_semantic, add_to_memory_episodic
 
 # Get model from environment or use default
@@ -196,10 +196,7 @@ semantic_builder = Agent(
     tool_choice="required",
     temperature=0,
     tools=[add_to_memory_semantic],
-    model=OpenAIChatCompletionsModel(
-        model=model_name,
-        openai_client=AsyncOpenAI(),
-    )
+    model=OllamaProvider(model_name=model_name).get_model()
 )
 
 
@@ -211,10 +208,7 @@ episodic_builder = Agent(
     tool_choice="required",
     temperature=0,
     tools=[add_to_memory_episodic],
-    model=OpenAIChatCompletionsModel(
-        model=model_name,
-        openai_client=AsyncOpenAI(),
-    )
+    model=OllamaProvider(model_name=model_name).get_model()
 )
 
 query_agent = Agent(
@@ -225,8 +219,5 @@ query_agent = Agent(
     instructions=QUERY_PROMPT,
     tool_choice="required",
     temperature=0,
-    model=OpenAIChatCompletionsModel(
-        model=model_name,
-        openai_client=AsyncOpenAI(),
-    )
+    model=OllamaProvider(model_name=model_name).get_model()
 )

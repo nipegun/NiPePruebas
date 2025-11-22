@@ -1,0 +1,2 @@
+{"event": "session_start", "timestamp": "2025-11-22T23:54:45.758502+01:00", "session_id": "0c04d865-b6f7-496a-bfdb-227a7617fb18"}
+{"event": "session_end", "timestamp": "2025-11-22T23:55:33.500837+01:00", "session_id": "0c04d865-b6f7-496a-bfdb-227a7617fb18", "timing_metrics": {"active_time_seconds": 0.0041773319244384766, "idle_time_seconds": 47.962398052215576, "total_time_seconds": 47.966575384140015, "active_percentage": 0.01}, "cost": {"total_cost": 0.0}}

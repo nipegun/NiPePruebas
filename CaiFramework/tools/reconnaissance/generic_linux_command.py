@@ -65,7 +65,7 @@ def detect_unicode_homographs(text: str) -> tuple[bool, str]:
 @function_tool
 async def generic_linux_command(command: str = "",
                           interactive: bool = False,
-                          session_id: str = None) -> str:
+                          session_id: str | None = None) -> str:
     """
     Execute commands with session management.
 
@@ -102,6 +102,10 @@ async def generic_linux_command(command: str = "",
     Returns:
         Command output, session ID for interactive commands, or status message
     """
+    # Normalize session_id - treat "null", "None", empty string as None
+    if session_id in ("null", "None", ""):
+        session_id = None
+
     # Handle special session management commands (tolerant parser)
     cmd_lower = command.strip().lower()
     if cmd_lower.startswith("output "):
@@ -267,7 +271,7 @@ async def generic_linux_command(command: str = "",
         parallel_count = int(os.getenv("CAI_PARALLEL", "1"))
         if parallel_count > 1:
             # Check if this is a P agent
-            from cai.sdk.agents.models.openai_chatcompletions import get_current_active_model
+            from cai.sdk.agents.models.chatcompletions import get_current_active_model
             model = get_current_active_model()
             if model and hasattr(model, 'agent_id') and model.agent_id:
                 if model.agent_id.startswith('P') and model.agent_id[1:].isdigit():

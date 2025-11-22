@@ -1,8 +1,8 @@
 """Sub-GHz Radio Frequency Analysis Agent using HackRF One"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
-from openai import AsyncOpenAI
+from cai.sdk.agents import Agent  # pylint: disable=import-error
+from cai.sdk.agents.models.ollama_provider import OllamaProvider
 from cai.util import load_prompt_template  # Add this import
 from cai.tools.command_and_control.sshpass import (  # pylint: disable=import-error # noqa: E501
     run_ssh_command_with_credentials
@@ -42,7 +42,7 @@ subghz_sdr_agent = Agent(
                    Specializes in signal capture, replay, and protocol analysis for IoT, 
                    automotive, industrial, and wireless security applications.""",
     tools=functions,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
         openai_client=AsyncOpenAI(),
     )

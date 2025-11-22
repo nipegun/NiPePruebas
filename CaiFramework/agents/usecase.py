@@ -1,13 +1,13 @@
 """Use Case Agent"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
-from openai import AsyncOpenAI
+from cai.sdk.agents import Agent
+from cai.sdk.agents.models.ollama_provider import OllamaProvider
 from cai.tools.reconnaissance.generic_linux_command import null_tool
 from cai.util import load_prompt_template, create_system_prompt_renderer
 
 load_dotenv()
-model_name = os.getenv("CAI_MODEL", "alias0")
+model_name = os.getenv("CAI_MODEL", "llama3.2")
 
 # Load prompt
 use_case_agent_system_prompt = load_prompt_template("prompts/system_use_cases.md")
@@ -35,10 +35,7 @@ use_case_agent = Agent(
                    CTF challenges, and cybersecurity exercises.""",
     instructions=create_system_prompt_renderer(use_case_agent_system_prompt),
     tools=tools,
-    model=OpenAIChatCompletionsModel(
-        model=model_name,
-        openai_client=AsyncOpenAI(),
-    ),
+    model=OllamaProvider(model_name=model_name).get_model(),
 )
 
 # Transfer function

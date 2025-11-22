@@ -304,10 +304,10 @@ from cai.repl.ui.prompt import get_user_input
 from cai.repl.ui.toolbar import get_toolbar_with_refresh
 
 # CAI SDK imports
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel, Runner, set_tracing_disabled
+from cai.sdk.agents import Agent, ChatCompletionsModel, Runner, set_tracing_disabled
 from cai.sdk.agents.items import ToolCallOutputItem
 from cai.sdk.agents.exceptions import OutputGuardrailTripwireTriggered, InputGuardrailTripwireTriggered
-from cai.sdk.agents.models.openai_chatcompletions import (
+from cai.sdk.agents.models.chatcompletions import (
     get_agent_message_history,
     get_all_agent_histories,
 )

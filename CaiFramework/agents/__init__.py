@@ -61,7 +61,7 @@ from cai.sdk.agents.handoffs import handoff
 __path__ = pkgutil.extend_path(__path__, __name__)
 
 # Get model from environment or use default
-model = os.environ.get("CAI_MODEL", "alias0")
+model = os.environ.get("CAI_MODEL", "llama3.2")
 
 
 PATTERNS = ["hierarchical", "swarm", "chain_of_thought", "auction_based", "recursive"]
@@ -234,7 +234,7 @@ def get_agent_by_name(agent_name: str, custom_name: str = None, model_override: 
         try:
             # Create a new model instance
             model_class = agent.model.__class__
-            if model_class.__name__ == "OpenAIChatCompletionsModel":
+            if model_class.__name__ == "ChatCompletionsModel":
                 # Use custom name if provided, otherwise use agent's name
                 instance_name = custom_name if custom_name else agent.name
                 # Determine which model to use

@@ -27,7 +27,7 @@ def _get_agent_token_info():
     """Get current agent's token information from the active model instance."""
     # Try to get agent info from the current execution context
     try:
-        from cai.sdk.agents.models.openai_chatcompletions import get_current_active_model
+        from cai.sdk.agents.models.chatcompletions import get_current_active_model
         
         # First try to get the current active model (set during execution)
         model = get_current_active_model()
@@ -57,7 +57,7 @@ def _get_agent_token_info():
             }
         
         # Fallback: Try to get from the most recent instance in the registry
-        from cai.sdk.agents.models.openai_chatcompletions import ACTIVE_MODEL_INSTANCES
+        from cai.sdk.agents.models.chatcompletions import ACTIVE_MODEL_INSTANCES
         
         if ACTIVE_MODEL_INSTANCES:
             # Get the most recent instance (highest instance ID)
