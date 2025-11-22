@@ -33,6 +33,7 @@ from .items import (
 )
 from .lifecycle import AgentHooks, RunHooks
 from .model_settings import ModelSettings
+from .models.openai_chatcompletions import ChatCompletionsModel
 from .models.interface import Model, ModelProvider, ModelTracing
 from .result import RunResult, RunResultStreaming
 from .run import RunConfig, Runner
@@ -97,10 +98,11 @@ __all__ = [
     "ToolsToFinalOutputFunction",
     "ToolsToFinalOutputResult",
     "Runner",
-    "Model",
-    "ModelProvider",
-    "ModelTracing",
-    "ModelSettings",
+    "Model", 
+    "ModelProvider", 
+    "ModelTracing", 
+    "ModelSettings", 
+    "ChatCompletionsModel", 
     "AgentOutputSchema",
     "Computer",
     "AsyncComputer",
