@@ -17,7 +17,7 @@ pyenv install 3.8.19
 # Crear entorno virtual
   mkdir ~/HackingTools/AutoHacker/
   cd ~/HackingTools/AutoHacker/
-  pyenv virtualenv 3.8.19 venv38
-  pyenv activate venv38
+  pyenv virtualenv 3.8.19 AutoHacker
+  pyenv activate AutoHacker
 
   source deactivate
