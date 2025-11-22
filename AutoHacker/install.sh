@@ -11,13 +11,18 @@ echo 'eval "$(pyenv virtualenv-init -)"'    | tee -a ~/.bashrc
 
 source ~/.bashrc
 
+vVersPython='3.8.19'
 
-pyenv install 3.8.19
+pyenv install "$vVersPython"
 
 # Crear entorno virtual
   mkdir ~/HackingTools/AutoHacker/
   cd ~/HackingTools/AutoHacker/
-  pyenv virtualenv 3.8.19 AutoHacker
-  pyenv activate AutoHacker
+  $HOME/.pyenv/versions/"$vVersPython"/bin/python3.8 -m venv ~/HackingTools/AutoHacker/venv38
+
+source $HOME/HackingTools/AutoHacker/venv38/bin/activate
+  pip install --upgrade pip
+  cd $HOME/HackingTools/AutoHacker/
+  pip install -r requirements.txt
 
   source deactivate
