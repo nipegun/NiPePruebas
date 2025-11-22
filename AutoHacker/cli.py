@@ -1,112 +1,112 @@
 """
-This module provides a CLI interface for testing and
-interacting with CAI agents.
+Este módulo proporciona una interfaz de CLI para probar e
+interactuar con los agentes CAI.
 
-Environment Variables
----------------------
-    Required:
+Variables de entorno
+--------------------
+    Obligatorias:
         N/A
 
-    Optional:
-        CTF_NAME: Name of the CTF challenge to
-            run (e.g. "picoctf_static_flag")
-        CTF_CHALLENGE: Specific challenge name
-            within the CTF to test
-        CTF_SUBNET: Network subnet for the CTF
-            container (default: "192.168.3.0/24")
-        CTF_IP: IP address for the CTF
-            container (default: "192.168.3.100")
-        CTF_INSIDE: Whether to conquer the CTF from
-            within container (default: "true")
+    Opcionales:
+        CTF_NAME: nombre del reto CTF que se
+            ejecutará (p. ej., "picoctf_static_flag")
+        CTF_CHALLENGE: nombre específico del reto
+            dentro del CTF que se va a probar
+        CTF_SUBNET: subred de red para el contenedor
+            del CTF (por defecto: "192.168.3.0/24")
+        CTF_IP: dirección IP para el contenedor del CTF
+            (por defecto: "192.168.3.100")
+        CTF_INSIDE: indica si se resuelve el CTF desde
+            dentro del contenedor (por defecto: "true")
 
-        CAI_MODEL: Model to use for agents
-            (default: "alias0")
-        CAI_DEBUG: Set debug output level (default: "1")
-            - 0: Only tool outputs
-            - 1: Verbose debug output
-            - 2: CLI debug output
-        CAI_BRIEF: Enable/disable brief output mode (default: "false")
-        CAI_MAX_TURNS: Maximum number of turns for
-            agent interactions (default: "inf")
-        CAI_TRACING: Enable/disable OpenTelemetry tracing
-            (default: "true"). When enabled, traces execution
-            flow and agent interactions for debugging and analysis.
-        CAI_AGENT_TYPE: Specify the agents to use it could take
-            the value of (default: "one_tool_agent"). Use "/agent"
-            command in CLI to list all available agents.
-        CAI_STATE: Enable/disable stateful mode (default: "false").
-            When enabled, the agent will use a state agent to keep
-            track of the state of the network and the flags found.
-        CAI_MEMORY: Enable/disable memory mode (default: "false")
-            - episodic: use episodic memory
-            - semantic: use semantic memory
-            - all: use both episodic and semantic memorys
-        CAI_MEMORY_ONLINE: Enable/disable online memory mode
-            (default: "false")
-        CAI_MEMORY_OFFLINE: Enable/disable offline memory
-            (default: "false")
-        CAI_ENV_CONTEXT: Add enviroment context, dirs and
-            current env available (default: "true")
-        CAI_MEMORY_ONLINE_INTERVAL: Number of turns between
-            online memory updates (default: "5")
-        CAI_PRICE_LIMIT: Price limit for the conversation in dollars
-            (default: "1")
-        CAI_SUPPORT_MODEL: Model to use for the support agent
-            (default: "o3-mini")
-        CAI_SUPPORT_INTERVAL: Number of turns between support agent
-            executions (default: "5")
-        CAI_STREAM: Enable/disable streaming output in rich panel
-            (default: "false")
-        CAI_TELEMETRY: Enable/disable telemetry (default: "true")
-        CAI_PARALLEL: Number of parallel agent instances to run
-            (default: "1"). When set to values greater than 1,
-            executes multiple instances of the same agent in
-            parallel and displays all results.
-        CAI_GUARDRAILS: Enable/disable security guardrails for agents
-            (default: "true"). When enabled, applies security guardrails
-            to prevent potentially dangerous outputs and inputs. Set to
-            "false" to disable all guardrail functionality.
+        CAI_MODEL: modelo que usarán los agentes
+            (por defecto: "alias0")
+        CAI_DEBUG: nivel de salida de depuración (por defecto: "1")
+            - 0: solo salidas de herramientas
+            - 1: salida de depuración detallada
+            - 2: salida de depuración de la CLI
+        CAI_BRIEF: habilita/deshabilita el modo de salida breve (por defecto: "false")
+        CAI_MAX_TURNS: número máximo de turnos para
+            las interacciones con el agente (por defecto: "inf")
+        CAI_TRACING: habilita/deshabilita el trazado de OpenTelemetry
+            (por defecto: "true"). Cuando está activado, traza el flujo de
+            ejecución y las interacciones del agente para depuración y análisis.
+        CAI_AGENT_TYPE: especifica los agentes que se usarán; puede tomar
+            el valor (por defecto: "one_tool_agent"). Usa el comando "/agent"
+            en la CLI para listar todos los agentes disponibles.
+        CAI_STATE: habilita/deshabilita el modo con estado (por defecto: "false").
+            Cuando está activado, el agente utilizará un agente de estado para
+            seguir el estado de la red y de las banderas encontradas.
+        CAI_MEMORY: habilita/deshabilita el modo de memoria (por defecto: "false")
+            - episodic: usa memoria episódica
+            - semantic: usa memoria semántica
+            - all: usa ambas memorias episódica y semántica
+        CAI_MEMORY_ONLINE: habilita/deshabilita el modo de memoria en línea
+            (por defecto: "false")
+        CAI_MEMORY_OFFLINE: habilita/deshabilita la memoria fuera de línea
+            (por defecto: "false")
+        CAI_ENV_CONTEXT: añade contexto del entorno, directorios y
+            entorno actual disponible (por defecto: "true")
+        CAI_MEMORY_ONLINE_INTERVAL: número de turnos entre
+            actualizaciones de memoria en línea (por defecto: "5")
+        CAI_PRICE_LIMIT: límite de precio de la conversación en dólares
+            (por defecto: "1")
+        CAI_SUPPORT_MODEL: modelo que utilizará el agente de soporte
+            (por defecto: "o3-mini")
+        CAI_SUPPORT_INTERVAL: número de turnos entre
+            ejecuciones del agente de soporte (por defecto: "5")
+        CAI_STREAM: habilita/deshabilita la salida en streaming en el panel rich
+            (por defecto: "false")
+        CAI_TELEMETRY: habilita/deshabilita la telemetría (por defecto: "true")
+        CAI_PARALLEL: número de instancias paralelas del agente que se ejecutarán
+            (por defecto: "1"). Cuando se establece en valores superiores a 1,
+            ejecuta varias instancias del mismo agente en paralelo y muestra todos
+            los resultados.
+        CAI_GUARDRAILS: habilita/deshabilita las barandillas de seguridad para los agentes
+            (por defecto: "true"). Cuando está activado, aplica barandillas de seguridad
+            para evitar salidas y entradas potencialmente peligrosas. Establécelo en
+            "false" para desactivar toda la funcionalidad de guardrails.
 
-    Extensions (only applicable if the right extension is installed):
+    Extensiones (solo aplicable si la extensión correcta está instalada):
 
         "report"
-            CAI_REPORT: Enable/disable reporter mode. Possible values:
-                - ctf (default): do a report from a ctf resolution
-                - nis2: do a report for nis2
-                - pentesting: do a report from a pentesting
+            CAI_REPORT: habilita/deshabilita el modo de creación de informes. Valores posibles:
+                - ctf (por defecto): genera un informe de la resolución de un CTF
+                - nis2: genera un informe para nis2
+                - pentesting: genera un informe para un pentesting
 
-Usage Examples:
+Ejemplos de uso:
 
-    # Run against a CTF
+    # Ejecutar contra un CTF
     CTF_NAME="kiddoctf" CTF_CHALLENGE="02 linux ii" \
         CAI_AGENT_TYPE="one_tool_agent" CAI_MODEL="alias0" \
         CAI_TRACING="false" cai
 
-    # Run a harder CTF
+    # Ejecutar un CTF más difícil
     CTF_NAME="hackableii" CAI_AGENT_TYPE="redteam_agent" \
         CTF_INSIDE="False" CAI_MODEL="alias0" \
         CAI_TRACING="false" cai
 
-    # Run without a target in human-in-the-loop mode, generating a report
+    # Ejecutar sin objetivo en modo human-in-the-loop, generando un informe
     CAI_TRACING=False CAI_REPORT=pentesting CAI_MODEL="alias0" \
         cai
 
-    # Run with online episodic memory
-    #   registers memory every 5 turns:
-    #   limits the cost to 5 dollars
+    # Ejecutar con memoria episódica en línea
+    #   registra memoria cada 5 turnos:
+    #   limita el coste a 5 dólares
     CTF_NAME="hackableII" CAI_MEMORY="episodic" \
         CAI_MODEL="alias0" CAI_MEMORY_ONLINE="True" \
         CTF_INSIDE="False" CTF_HINTS="False"  \
         CAI_PRICE_LIMIT="5" cai
 
-    # Run with custom long_term_memory interval
-    # Executes memory long_term_memory every 3 turns:
+    # Ejecutar con intervalo personalizado para long_term_memory
+    # Ejecuta long_term_memory cada 3 turnos:
     CTF_NAME="hackableII" CAI_MEMORY="episodic" \
         CAI_MODEL="alias0" CAI_MEMORY_ONLINE_INTERVAL="3" \
         CAI_MEMORY_ONLINE="False" CTF_INSIDE="False" \
         CTF_HINTS="False" cai
-        
-    # Run with parallel agents (3 instances)
+
+    # Ejecutar con agentes en paralelo (3 instancias)
     CTF_NAME="hackableII" CAI_AGENT_TYPE="redteam_agent" \
         CAI_MODEL="alias0" CAI_PARALLEL="3" cai
 """
