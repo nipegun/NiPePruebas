@@ -16,7 +16,7 @@ vVersPython='3.8.19'
 pyenv install "$vVersPython"
 
 # Crear entorno virtual
-  mkdir ~/HackingTools/AutoHacker/
+  mkdir ~/HackingTools/AutoHacker/ 2> /dev/null
   cd ~/HackingTools/AutoHacker/
   $HOME/.pyenv/versions/"$vVersPython"/bin/python3.8 -m venv ~/HackingTools/AutoHacker/venv38
 
@@ -24,5 +24,7 @@ source $HOME/HackingTools/AutoHacker/venv38/bin/activate
   pip install --upgrade pip
   cd $HOME/HackingTools/AutoHacker/
   pip install -r requirements.txt
+
+sed -i 's|from cai.|from CAI.|g' ~/HackingTools/AutoHacker/cli.py
 
   source deactivate
