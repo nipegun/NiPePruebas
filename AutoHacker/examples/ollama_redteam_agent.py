@@ -6,6 +6,9 @@ que utiliza Ollama con modelos locales en lugar de APIs de pago.
 """
 
 import os
+import sys
+from pathlib import Path
+
 from dotenv import load_dotenv
 from cai.sdk.agents import Agent
 from cai.sdk.agents.models.ollama_provider import OllamaProvider
@@ -15,6 +18,11 @@ from cai.tools.web.search_web import make_web_search_with_explanation
 from cai.tools.reconnaissance.exec_code import execute_code
 from cai.util import load_prompt_template, create_system_prompt_renderer
 from cai.agents.guardrails import get_security_guardrails
+
+# Ensure repository root is on the import path when running the example directly
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 load_dotenv()
 

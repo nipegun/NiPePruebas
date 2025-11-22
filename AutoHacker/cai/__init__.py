@@ -9,11 +9,18 @@ call sites.
 
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
 
 _here = Path(__file__).resolve().parent
 _repo_root = _here.parent
+
+# Provide a safe fallback API key to prevent initialization errors when the
+# environment variable is missing. This avoids crashes when running examples
+# or the CLI with local-only model providers that do not require a real
+# OpenAI key.
+os.environ.setdefault("OPENAI_API_KEY", "sk-placeholder-key-for-local-models")
 
 if str(_repo_root) not in sys.path:
   sys.path.insert(0, str(_repo_root))
