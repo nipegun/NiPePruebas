@@ -6,7 +6,7 @@ It includes:
 - `android_sast_agent`: An agent for static analysis and vulnerability discovery in Android applications.
 """
 
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent, ChatCompletionsModel
 from cai.tools.reconnaissance.generic_linux_command import generic_linux_command
 from openai import AsyncOpenAI
 import os
@@ -39,7 +39,7 @@ app_logic_mapper = Agent(
     description="Agent specializing in application analysis to understand the logic of operation and return a complete map of it.",
     instructions=create_system_prompt_renderer(app_logic_mapper_system_prompt),
     tools=tools,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=model_name,
         openai_client=AsyncOpenAI(),
     ),
@@ -59,7 +59,7 @@ android_sast = Agent(
         generic_linux_command,
         execute_code,
         ],
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=model_name,
         openai_client=AsyncOpenAI(),
     ),

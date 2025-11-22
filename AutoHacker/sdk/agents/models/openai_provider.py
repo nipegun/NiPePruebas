@@ -5,7 +5,7 @@ from openai import AsyncOpenAI, DefaultAsyncHttpxClient
 
 from . import _openai_shared
 from .interface import Model, ModelProvider
-from .openai_chatcompletions import OpenAIChatCompletionsModel
+from .openai_chatcompletions import ChatCompletionsModel
 from .openai_responses import OpenAIResponsesModel
 
 DEFAULT_MODEL: str = "gpt-4o"
@@ -87,5 +87,5 @@ class OpenAIProvider(ModelProvider):
         return (
             OpenAIResponsesModel(model=model_name, openai_client=client)
             if self._use_responses
-            else OpenAIChatCompletionsModel(model=model_name, openai_client=client)
+            else ChatCompletionsModel(model=model_name, openai_client=client)
         )

@@ -234,7 +234,7 @@ def get_agent_by_name(agent_name: str, custom_name: str = None, model_override: 
         try:
             # Create a new model instance
             model_class = agent.model.__class__
-            if model_class.__name__ == "OpenAIChatCompletionsModel":
+            if model_class.__name__ == "ChatCompletionsModel":
                 # Use custom name if provided, otherwise use agent's name
                 instance_name = custom_name if custom_name else agent.name
                 # Determine which model to use

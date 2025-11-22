@@ -46,7 +46,7 @@ class AgentRegistry:
         Register a new agent instance.
         
         Args:
-            model_instance: The OpenAIChatCompletionsModel instance
+            model_instance: The ChatCompletionsModel instance
             agent_type: The type of agent (e.g., "red_teamer")
             display_name: The display name (e.g., "Red Team Agent")
             agent_id: Optional specific ID (e.g., "P1"). If None, auto-generates.

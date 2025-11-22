@@ -23,7 +23,7 @@ from cai.agents import get_available_agents
 # Local imports
 from cai.repl.commands.base import Command, register_command
 from cai.sdk.agents.models.openai_chatcompletions import (
-    OpenAIChatCompletionsModel,
+    ChatCompletionsModel,
     get_all_agent_histories,
     clear_agent_history,
 )

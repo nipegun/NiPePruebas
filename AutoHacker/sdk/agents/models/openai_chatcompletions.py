@@ -361,7 +361,7 @@ def count_tokens_with_tiktoken(text_or_messages):
         return 0, 0
 
 
-class OpenAIChatCompletionsModel(Model):
+class ChatCompletionsModel(Model):
     """OpenAI Chat Completions Model"""
 
     INTERMEDIATE_LOG_INTERVAL = 5
@@ -4092,12 +4092,12 @@ class _Converter:
                     tool_args = tool_call_details.get("arguments", {})
                     execution_info = tool_call_details.get("execution_info", {})
 
-                # Get token counts from the OpenAIChatCompletionsModel if available
+                # Get token counts from the ChatCompletionsModel if available
                 model_instance = None
                 for frame in inspect.stack():
                     if "self" in frame.frame.f_locals:
                         self_obj = frame.frame.f_locals["self"]
-                        if isinstance(self_obj, OpenAIChatCompletionsModel):
+                        if isinstance(self_obj, ChatCompletionsModel):
                             model_instance = self_obj
                             break
 

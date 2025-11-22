@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from openai import AsyncOpenAI
 
 from cai.agents.guardrails import get_security_guardrails
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent, ChatCompletionsModel
 from cai.tools.command_and_control.sshpass import run_ssh_command_with_credentials  # pylint: disable=import-error
 from cai.tools.reconnaissance.exec_code import execute_code  # pylint: disable=import-error
 from cai.tools.reconnaissance.generic_linux_command import generic_linux_command  # pylint: disable=import-error
@@ -40,7 +40,7 @@ bug_bounter_agent = Agent(
   tools=tools,
   input_guardrails=input_guardrails,
   output_guardrails=output_guardrails,
-  model=OpenAIChatCompletionsModel(
+  model=ChatCompletionsModel(
     model=os.getenv("CAI_MODEL", "alias0"),
     openai_client=AsyncOpenAI(),
   ),

@@ -1,7 +1,7 @@
 """Use Case Agent"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent, ChatCompletionsModel
 from openai import AsyncOpenAI
 from cai.tools.reconnaissance.generic_linux_command import null_tool
 from cai.util import load_prompt_template, create_system_prompt_renderer
@@ -35,7 +35,7 @@ use_case_agent = Agent(
                    CTF challenges, and cybersecurity exercises.""",
     instructions=create_system_prompt_renderer(use_case_agent_system_prompt),
     tools=tools,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=model_name,
         openai_client=AsyncOpenAI(),
     ),

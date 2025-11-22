@@ -46,7 +46,7 @@ class ModelSettings:
     
     agent_model: str | None = None
     """The model from the Agent class. If set, this will override the model provided
-    to the OpenAIChatCompletionsModel during initialization."""
+    to the ChatCompletionsModel during initialization."""
 
     def resolve(self, override: ModelSettings | None) -> ModelSettings:
         """Produce a new ModelSettings by overlaying any non-None values from the

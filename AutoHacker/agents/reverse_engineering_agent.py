@@ -1,7 +1,7 @@
 """Reverse Engineering and Binary Analysis Agent"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
+from cai.sdk.agents import Agent, ChatCompletionsModel  # pylint: disable=import-error
 from openai import AsyncOpenAI
 from cai.util import load_prompt_template  # Add this import
 from cai.tools.command_and_control.sshpass import (  # pylint: disable=import-error # noqa: E501
@@ -43,7 +43,7 @@ reverse_engineering_agent = Agent(
                    decompilation, and vulnerability discovery using tools
                    like Ghidra, Binwalk, and various binary analysis utilities.""",
     tools=functions,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
         openai_client=AsyncOpenAI(),
     )

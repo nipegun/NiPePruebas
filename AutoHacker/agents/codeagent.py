@@ -31,7 +31,7 @@ from cai.agents.meta.local_python_executor import (
     fix_final_answer_code,
     truncate_content,
 )
-from cai.sdk.agents import Agent, Result, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent, Result, ChatCompletionsModel
 from dotenv import load_dotenv
 from openai import AsyncOpenAI
 

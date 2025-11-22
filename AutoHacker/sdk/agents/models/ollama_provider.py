@@ -14,7 +14,7 @@ import httpx
 from openai import AsyncOpenAI, DefaultAsyncHttpxClient
 
 from .interface import Model, ModelProvider
-from .openai_chatcompletions import OpenAIChatCompletionsModel
+from .openai_chatcompletions import ChatCompletionsModel
 
 # Default Ollama configuration
 DEFAULT_OLLAMA_MODEL: str = "llama3.2"
@@ -131,7 +131,7 @@ class OllamaProvider(ModelProvider):
                        uses the default model specified in __init__
                        
         Returns:
-            OpenAIChatCompletionsModel configured for Ollama
+            ChatCompletionsModel configured for Ollama
             
         Examples:
             >>> provider = OllamaProvider()
@@ -144,7 +144,7 @@ class OllamaProvider(ModelProvider):
 
         client = self._get_client()
 
-        return OpenAIChatCompletionsModel(
+        return ChatCompletionsModel(
             model=f"ollama/{model_name}",  # Prefix with ollama/ for litellm routing
             openai_client=client,
         )
@@ -185,7 +185,7 @@ def create_ollama_model(
         base_url: Ollama API base URL (default: from OLLAMA_API_BASE env or http://localhost:11434/v1)
         
     Returns:
-        OpenAIChatCompletionsModel configured for Ollama
+        ChatCompletionsModel configured for Ollama
         
     Example:
         >>> from cai.sdk.agents.models.ollama_provider import create_ollama_model

@@ -1,7 +1,7 @@
 """Retester Agent for vulnerability verification and triage"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent, ChatCompletionsModel
 from openai import AsyncOpenAI
 from cai.util import load_prompt_template, create_system_prompt_renderer
 from cai.tools.reconnaissance.generic_linux_command import (  # pylint: disable=import-error # noqa: E501
@@ -35,7 +35,7 @@ retester_agent = Agent(
                    triage. Expert in determining exploitability and 
                    eliminating false positives.""",
     tools=tools,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
         openai_client=AsyncOpenAI(),
     )

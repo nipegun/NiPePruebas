@@ -14,7 +14,7 @@ import httpx
 from openai import AsyncOpenAI, DefaultAsyncHttpxClient
 
 from .interface import Model, ModelProvider
-from .openai_chatcompletions import OpenAIChatCompletionsModel
+from .openai_chatcompletions import ChatCompletionsModel
 
 # Default llama.cpp configuration
 DEFAULT_LLAMACPP_MODEL: str = "local-model"
@@ -158,7 +158,7 @@ class LlamaCppProvider(ModelProvider):
                        (usually "local-model" for llama.cpp)
                        
         Returns:
-            OpenAIChatCompletionsModel configured for llama.cpp
+            ChatCompletionsModel configured for llama.cpp
             
         Examples:
             >>> provider = LlamaCppProvider()
@@ -170,7 +170,7 @@ class LlamaCppProvider(ModelProvider):
 
         client = self._get_client()
 
-        return OpenAIChatCompletionsModel(
+        return ChatCompletionsModel(
             model=model_name,
             openai_client=client,
         )
@@ -215,7 +215,7 @@ def create_llamacpp_model(
         context_size: Context window size (optional)
         
     Returns:
-        OpenAIChatCompletionsModel configured for llama.cpp
+        ChatCompletionsModel configured for llama.cpp
         
     Example:
         >>> from cai.sdk.agents.models.llamacpp_provider import create_llamacpp_model

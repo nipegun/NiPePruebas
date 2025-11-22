@@ -18,7 +18,7 @@ from cai.repl.commands.base import Command, register_command
 from cai.sdk.agents.models.openai_chatcompletions import (
     get_all_agent_histories, 
     get_agent_message_history,
-    OpenAIChatCompletionsModel,
+    ChatCompletionsModel,
     get_current_active_model,
     ACTIVE_MODEL_INSTANCES,
     PERSISTENT_MESSAGE_HISTORIES
@@ -1238,7 +1238,7 @@ This session is being continued from a previous conversation that ran out of con
         summary_agent = Agent(
             name="Summary Agent",
             instructions=instructions,
-            model=OpenAIChatCompletionsModel(
+            model=ChatCompletionsModel(
                 model=model_name,
                 openai_client=AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY")),
                 agent_name="Summary Agent"

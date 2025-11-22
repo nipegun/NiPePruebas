@@ -1,7 +1,7 @@
 """Reporter Agent - Creates professional security assessment reports"""
 import os
 from dotenv import load_dotenv
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel  # pylint: disable=import-error
+from cai.sdk.agents import Agent, ChatCompletionsModel  # pylint: disable=import-error
 from openai import AsyncOpenAI
 from cai.util import load_prompt_template  # Add this import
 
@@ -30,7 +30,7 @@ reporting_agent = Agent(
     instructions=reporting_agent_system_prompt,
     description="""Agent that generates reports in html.""",
     tools=functions,
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
         openai_client=AsyncOpenAI(),
     )

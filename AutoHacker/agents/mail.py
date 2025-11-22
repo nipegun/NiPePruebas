@@ -5,7 +5,7 @@ Mail Agent module for checking email configuration security.
 import os
 from openai import AsyncOpenAI
 import dns.resolver  # pylint: disable=import-error
-from cai.sdk.agents import Agent, OpenAIChatCompletionsModel
+from cai.sdk.agents import Agent, ChatCompletionsModel
 from cai.tools.misc.cli_utils import execute_cli_command
 from cai.sdk.agents import function_tool
 
@@ -114,7 +114,7 @@ dns_smtp_agent = Agent(
         "USE ONLY TOOL CALLS, DONT RETURN REASON."
     ),
     tools=[check_mail_spoofing_vulnerability, execute_cli_command],
-    model=OpenAIChatCompletionsModel(
+    model=ChatCompletionsModel(
         model=os.getenv('CAI_MODEL', "alias0"),
         openai_client=AsyncOpenAI(),
     )
