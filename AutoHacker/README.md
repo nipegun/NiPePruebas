@@ -7,7 +7,8 @@ mkdir ~/Git/ 2> /dev/null
 cd ~/Git/
 rm -rf pruebas/
 git clone https://github.com/nipegun/pruebas.git
-mkdir ~/HackingTools/AutoHacker/
+rm -rf ~/HackingTools/AutoHacker/ 2> /dev/null
+mkdir ~/HackingTools/AutoHacker/ 2> /dev/null
 cp -R ~/Git/pruebas/AutoHacker/* ~/HackingTools/AutoHacker/
 cd ~/HackingTools/AutoHacker/
 python3 -m venv venv
