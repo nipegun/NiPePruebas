@@ -143,6 +143,8 @@ import asyncio
 import logging
 import time
 
+from cai.sdk.agents.models.model_factory import get_current_provider_info, print_provider_info
+
 # Configure comprehensive error filtering
 class ComprehensiveErrorFilter(logging.Filter):
     """Filter to suppress various expected errors and warnings."""
@@ -1813,6 +1815,70 @@ def create_last_log_symlink(log_filename):
         pass
 
 
+def configure_provider_environment(provider_choice: str):
+    """Configure environment variables based on the selected provider.
+
+    Args:
+        provider_choice: Selected provider option (openai, ollama, llamacpp)
+    """
+
+    provider_choice = provider_choice.lower()
+
+    # Reset provider flags
+    os.environ["OLLAMA"] = "false"
+    os.environ["LLAMACPP"] = "false"
+
+    if provider_choice == "openai":
+        # Keep existing CAI_MODEL for OpenAI-compatible providers
+        return
+
+    if provider_choice == "ollama":
+        os.environ["OLLAMA"] = "true"
+        # Align CAI_MODEL with the Ollama model for consistency across the app
+        os.environ["CAI_MODEL"] = os.getenv("OLLAMA_MODEL", "llama3.2")
+        return
+
+    if provider_choice == "llamacpp":
+        os.environ["LLAMACPP"] = "true"
+        os.environ["CAI_MODEL"] = os.getenv("LLAMACPP_MODEL", "local-model")
+        return
+
+    print(
+        color(
+            "⚠️  Opción de provider no reconocida. Se mantiene la configuración actual.",
+            color="yellow",
+        )
+    )
+
+
+def prompt_for_provider_choice():
+    """Prompt the user to choose which provider will be used during the session."""
+
+    current_info = get_current_provider_info()
+    print("Selecciona el provider para esta sesión:")
+    print("  1) OpenAI (default)")
+    print("  2) Ollama")
+    print("  3) llama.cpp")
+    print(
+        f"\nProvider actual: {current_info.get('provider', 'openai-compatible')}"
+        f" (modelo: {current_info.get('model', os.getenv('CAI_MODEL', 'alias0'))})"
+    )
+
+    choice = input("Elige una opción (Enter para mantener el actual): ").strip()
+
+    mapping = {"1": "openai", "": "", "2": "ollama", "3": "llamacpp"}
+    provider_choice = mapping.get(choice, None)
+
+    if provider_choice is None:
+        print(color("Selección no válida. Manteniendo la configuración actual.", color="yellow"))
+        return
+
+    if provider_choice:
+        configure_provider_environment(provider_choice)
+
+    print_provider_info()
+
+
 def main():
     # Apply litellm patch to fix the __annotations__ error
     patch_applied = fix_litellm_transcription_annotations()
@@ -1823,6 +1889,9 @@ def main():
                 color="red",
             )
         )
+
+    # Ask the user which provider to use for this session
+    prompt_for_provider_choice()
 
     # Check for command-line arguments to use as initial prompt
     initial_prompt = None
