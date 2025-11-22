@@ -1,1 +1,7 @@
-.
+# AutoHack
+
+## Instalación
+
+```
+xxx
+```
