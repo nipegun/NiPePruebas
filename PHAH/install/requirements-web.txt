@@ -8,6 +8,8 @@ sudo apt-get -y update
   sudo apt-get -y install nikto
 # dirb
   sudo apt-get -y install dirb
+# gobuster
+  sudo apt-get -y install gobuster
 # whatweb
   sudo apt-get -y install whatweb
 # sslscan
