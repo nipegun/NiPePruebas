@@ -12,6 +12,8 @@ sudo apt-get -y update
   sudo apt-get -y install whatweb
 # sslscan
   sudo apt-get -y install sslscan
+# sqlmap
+  sudo apt-get -y install sqlmap
 # wpscan
   sudo apt-get -y install ruby
   sudo apt-get -y ruby-dev
