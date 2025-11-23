@@ -1,3 +1,15 @@
-nmap
-nikto
-dirb
+sudo apt-get -y update
+
+# nmap
+  sudo apt-get -y install nmap
+# nikto
+  sudo apt-get -y install nikto
+# dirb
+  sudo apt-get -y install dirb
+# wpscan
+  sudo apt-get -y install ruby
+  sudo apt-get -y ruby-dev
+  sudo apt-get -y make
+  sudo apt-get -y gcc
+  sudo apt-get -y zlib1g-dev
+  sudo gem install wpscan
