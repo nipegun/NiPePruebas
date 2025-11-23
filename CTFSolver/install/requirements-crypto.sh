@@ -1,4 +1,7 @@
-sudo apt-get -y update
+#!/bin/bash
+
+# Update
+  sudo apt-get -y update
 
 # pycryptodome
   sudo apt-get -y install python3-pycryptodome
@@ -8,3 +11,4 @@ sudo apt-get -y update
   sudo apt-get -y install john
 # openssl
   sudo apt-get -y install openssl
+
