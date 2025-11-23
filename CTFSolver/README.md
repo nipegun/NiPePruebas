@@ -1,4 +1,4 @@
-# CTF Solver - Resolución Automatizada de CTFs con IA
+# CTFSolver - Resolución Automatizada de CTFs con IA
 
 Sistema automatizado para resolver desafíos CTF (Capture The Flag) usando modelos de lenguaje local mediante Ollama.
 
