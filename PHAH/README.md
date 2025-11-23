@@ -1,19 +1,19 @@
-# 🔒 PHAH - Plataforma de Hacking de Penetración Automatizada
+# 🔒 PHAH - Plataforma de hacking automatizada
 
-**Pruebas de Penetración Automatizadas Potenciadas por IA con Ollama**
+**Pruebas de penetración automatizadas potenciadas por IA con Ollama**
 
-PHAH es una plataforma inteligente de pruebas de penetración que combina el poder de los Modelos de Lenguaje Grandes (Ollama) con herramientas tradicionales de seguridad para realizar evaluaciones de seguridad automatizadas y exhaustivas.
+PHAH es una plataforma inteligente de pruebas de penetración que combina el poder de los modelos de lenguaje grandes (Ollama) con herramientas tradicionales de seguridad para realizar evaluaciones de seguridad automatizadas y exhaustivas.
 
 ---
 
 ## 🌟 Características
 
-- **Pruebas Potenciadas por IA**: Usa LLMs de Ollama para toma de decisiones inteligente
-- **Soporte Multi-Servicio**: Prueba aplicaciones web, SSH, Samba, FTP, bases de datos y más
-- **Reportes Automatizados**: Genera reportes profesionales en HTML, Markdown y JSON
-- **Consciente del Contexto**: Mantiene historial de conversación para progresión inteligente de pruebas
-- **Extensible**: Fácil de añadir nuevos servicios y metodologías de prueba
-- **Local y Privado**: Todo el procesamiento ocurre en tu máquina con Ollama local
+- **Pruebas Potenciadas por IA**: Usa LLMs de Ollama para toma de decisiones inteligente.
+- **Soporte Multi-Servicio**: Prueba aplicaciones Web, SSH, Samba, FTP, bases de datos y más.
+- **Reportes Automatizados**: Genera reportes profesionales en HTML, Markdown y JSON.
+- **Consciente del Contexto**: Mantiene historial de conversación para progresión inteligente de pruebas.
+- **Extensible**: Fácil de añadir nuevos servicios y metodologías de prueba.
+- **Local y Privado**: Todo el procesamiento ocurre en tu máquina con Ollama local.
 
 ---
 
