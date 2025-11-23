@@ -13,6 +13,9 @@
   mkdir -p $HOME/HackingTools/PHAH/ 2> /dev/null
   rm -rf $HOME/HackingTools/PHAH/* 2> /dev/null
 
+# Desactivar posible entorno virtual de python ejecutándose
+  deactivate
+
 # Mover archivos a la carpeta
   cp -Rv /tmp/"$vNombreRepoGithub"/"$vUbicArchEnRepo"/* $HOME/HackingTools/PHAH/
 
