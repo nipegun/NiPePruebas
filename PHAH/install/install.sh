@@ -29,4 +29,15 @@
 
 # Notificar fin de la instalación
   echo ""
+  echo "  Instalación finalizada."
+  echo ""
+  echo "  Para ejecutar y posicionarse en la carpeta:"
+  echo ""
+  echo "    source $HOME/HackingTools/PHAH/venv/bin/activate  && cd $HOME/HackingTools/PHAH/"
+  echo ""
+  echo ""
+  echo "  Para listar servicios:"
+  echo ""
+  echo "    python phah.py --list-services"
+  echo ""
 
