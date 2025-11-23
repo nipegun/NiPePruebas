@@ -39,14 +39,14 @@ Ejemplos:
   parser.add_argument(
     '-service',
     type=str,
-    required=True,
+    required=False,
     help='Servicio a probar (web, ssh, samba, ftp, mysql, postgresql, rdp, dns, etc.)'
   )
 
   parser.add_argument(
     '-target',
     type=str,
-    required=True,
+    required=False,
     help='Host o URL objetivo'
   )
 
@@ -82,7 +82,20 @@ Ejemplos:
     help='Listar servicios disponibles y salir'
   )
 
-  return parser.parse_args()
+  args = parser.parse_args()
+
+  # Validar argumentos requeridos cuando no se solicita solo el listado
+  if not args.list_services:
+    missing_args = []
+    if not args.service:
+      missing_args.append('-service')
+    if not args.target:
+      missing_args.append('-target')
+
+    if missing_args:
+      parser.error(f"los siguientes argumentos son requeridos: {', '.join(missing_args)}")
+
+  return args
 
 
 def list_services():
