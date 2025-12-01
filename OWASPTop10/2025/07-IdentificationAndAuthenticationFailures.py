@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Vulnerabilidad simulada: Identification and Authentication Failures. El login usa una
-# contraseña hardcodeada y la sesión se transmite y modifica por querystring, permitiendo
-# suplantar identidades. El problema es la falta de controles robustos de autenticación y
-# gestión de sesión. Para explotarlo, un usuario puede enviar /login?p=1234 y luego cambiar la
-# URL a /panel?session=admin para asumir el rol deseado.
+
+# Vulnerabilidad simulada: Identification and Authentication Failures.
+# El login usa una contraseña hardcodeada y la sesión se transmite y modifica por querystring, permitiendo # suplantar identidades.
+# El problema es la falta de controles robustos de autenticación y gestión de sesión.
+# Para explotarlo, un usuario puede enviar /login?p=1234 y luego cambiar la URL a /panel?session=admin para asumir el rol deseado.
 
 from flask import Flask, request, redirect
 
