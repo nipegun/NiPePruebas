@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-# Vulnerabilidad simulada: Broken Access Control. La vista /admin no comprueba sesión ni rol
-# alguno, permitiendo que cualquiera acceda a funciones administrativas. La vulnerabilidad
-# consiste en la ausencia de controles de autorización. Para explotarla basta con solicitar
-# directamente http://host:25001/admin sin autenticarse.
+
+# Vulnerabilidad simulada: Broken Access Control.
+# La vista /admin no comprueba sesión ni rol alguno, permitiendo que cualquiera acceda a funciones administrativas.
+# La vulnerabilidad consiste en la ausencia de controles de autorización.
+# Para explotarla basta con solicitar directamente http://host:25001/admin sin autenticarse.
 
 from flask import Flask, request
 
