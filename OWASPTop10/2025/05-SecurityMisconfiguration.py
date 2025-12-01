@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Vulnerabilidad simulada: Security Misconfiguration. La ruta principal muestra todas las
+# variables de entorno y el servidor se ejecuta en modo debug, exponiendo secretos y trazas. La
+# falla proviene de configuraciones inseguras y falta de hardening. Para explotarla sólo hay que
+# visitar la raíz y leer los valores sensibles o forzar errores para ver información adicional.
 
 from flask import Flask
 import os

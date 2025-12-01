@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Vulnerabilidad simulada: Inyección SQL. Los parámetros u y p se concatenan directamente en la
+# consulta de autenticación sin usar parámetros preparados, permitiendo alterar la query. La
+# vulnerabilidad consiste en no depurar ni parametrizar entradas controladas por el usuario. Se
+# explota enviando valores como u=admin&p=' OR '1'='1 para saltar el login y enumerar datos.
 
 import sqlite3
 from flask import Flask, request

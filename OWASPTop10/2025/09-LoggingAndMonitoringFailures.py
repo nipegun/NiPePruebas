@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# Vulnerabilidad simulada: Logging and Monitoring Failures. El flujo de login no registra intentos
+# exitosos ni fallidos ni genera alertas, impidiendo detectar bruteforce o accesos indebidos. La
+# debilidad es la ausencia de telemetría y monitoreo. Para explotarla, un atacante puede probar
+# credenciales masivamente en /login?u=admin&p=... sin riesgo de ser detectado por logs.
 
 from flask import Flask, request
 

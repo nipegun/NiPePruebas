@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Vulnerabilidad simulada: Software and Data Integrity Failures. La ruta /upload acepta módulos
+# Python y los ejecuta inmediatamente sin firmas ni validaciones, permitiendo ejecución remota de
+# código arbitrario. La falla es confiar en archivos proporcionados por el usuario. Para
+# explotarla basta con subir un .py con cualquier payload (por ejemplo, abrir una shell) y
+# acceder a /upload para que el servidor lo ejecute.
 
 from flask import Flask, request
 import importlib.util, os
