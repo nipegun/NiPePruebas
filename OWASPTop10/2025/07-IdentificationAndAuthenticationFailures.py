@@ -19,4 +19,4 @@ def fPanel():
   return f"<h1>Panel de usuario: {vSession}</h1>"
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=5007, debug=True)
+  app.run(host="0.0.0.0", port=25007, debug=True)
