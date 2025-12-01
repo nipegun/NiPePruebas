@@ -9,6 +9,6 @@ Para descargar este repo, ejecuta:
 ```
 mkdir $HOME/Git/ 2> /dev/null
 cd $HOME/Git/
-rm -rf 
+rm -rf $HOME/Git/NiPePruebas/ 2> /dev/null
 git clone --depth 1 https://github.com/nipegun/NiPePruebas.git
 ```
