@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 from flask import Flask
 
 app = Flask(__name__)
@@ -17,4 +18,4 @@ def fIndex():
 
 if __name__ == "__main__":
   # VULN: Debug activo en producción
-  app.run(host="0.0.0.0", port=5002, debug=True)
+  app.run(host="0.0.0.0", port=25002, debug=True)
