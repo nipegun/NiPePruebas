@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+
 from flask import Flask, request
 import importlib.util, os
 
@@ -28,4 +29,4 @@ def fUpload():
   return "Plugin ejecutado"
 
 if __name__ == "__main__":
-  app.run(host="0.0.0.0", port=5008, debug=True)
+  app.run(host="0.0.0.0", port=25008, debug=True)
