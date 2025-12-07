@@ -1,80 +1,75 @@
 #!/bin/bash
 
-# install-native.sh
-# Installs OSINT framework (n8n, Maigret, Sherlock, Holehe) natively on Debian 13.
+# install.sh
+# Instala el framework AIOSINT (n8n, Maigret, Sherlock, Holehe) de forma nativa en Debian 13.
 
-# Colors for output
+# Colores para la salida
 cColorRojo='\033[1;31m'
 cColorVerde='\033[1;32m'
 cFinColor='\033[0m'
 
-echo -e "${cColorVerde}[+] Starting native installation for Debian 13...${cFinColor}"
+echo -e "${cColorVerde}[+] Iniciando instalación nativa para Debian 13...${cFinColor}"
 
-# 1. Update and install system dependencies
-echo -e "${cColorVerde}[+] Updating system and installing base dependencies...${cFinColor}"
+# 1. Actualizar e instalar dependencias del sistema
+echo -e "${cColorVerde}[+] Actualizando el sistema e instalando dependencias base...${cFinColor}"
 sudo apt-get update
-sudo apt-get install -y curl git python3-full python3-pip python3-venv nodejs npm build-essential libffi-dev libssl-dev zlib1g-dev
+sudo apt-get install -y curl git python3-full python3-pip python3-venv nodejs npm build-essential libffi-dev libssl-dev zlib1g-dev lsof netcat-openbsd procps
 
-# 2. Setup Directory Structure
-echo -e "${cColorVerde}[+] Setting up directory structure...${cFinColor}"
+# 2. Configurar estructura de directorios
+echo -e "${cColorVerde}[+] Configurando estructura de directorios...${cFinColor}"
 INSTALL_DIR="$HOME/aiosint"
 mkdir -p "$INSTALL_DIR/n8n/demo-data/workflows"
 mkdir -p "$INSTALL_DIR/venv"
 
-# Copy necessary files if they exist in the current directory (assuming run from repo root)
-# If running for the first time from a curl command, these might need to be downloaded.
-# For now, we assume this script is running from with the repo or contiguous to the files.
-
-# Ensure we have the latest files
-# Using the logic from the original script to download if not present, but preferring local if available.
-if [ -f "./n8n/social-api-native.py" ]; then
-    cp ./n8n/social-api-native.py "$INSTALL_DIR/n8n/"
+# Copiar archivos necesarios si existen en el directorio actual
+# Nos aseguramos de tener los archivos más recientes
+if [ -f "./n8n/social-api.py" ]; then
+    cp ./n8n/social-api.py "$INSTALL_DIR/n8n/"
 else
-    # Fallback to download (You might want to update this URL to your repo)
-    echo -e "${cColorRojo}[!] social-api-native.py not found locally. Please ensure it is present.${cFinColor}"
+    echo -e "${cColorRojo}[!] social-api.py no encontrado localmente. Por favor asegúrate de que esté presente.${cFinColor}"
 fi
 
 if [ -f "./n8n/demo-data/workflows/Agente_Smith.json" ]; then
     cp ./n8n/demo-data/workflows/Agente_Smith.json "$INSTALL_DIR/n8n/demo-data/workflows/"
 fi
 
-# 3. Install n8n globally
-echo -e "${cColorVerde}[+] Installing n8n globally...${cFinColor}"
+# 3. Instalar n8n globalmente
+echo -e "${cColorVerde}[+] Instalando n8n globalmente...${cFinColor}"
 sudo npm install -g n8n
 
-# 4. Install Python Tools in Virtual Environment
-echo -e "${cColorVerde}[+] Installing Python tools in virtual environment...${cFinColor}"
+# 4. Instalar herramientas Python en entorno virtual
+echo -e "${cColorVerde}[+] Instalando herramientas Python en entorno virtual...${cFinColor}"
 if [ ! -f "$INSTALL_DIR/venv/bin/activate" ]; then
     python3 -m venv "$INSTALL_DIR/venv"
 fi
 
 source "$INSTALL_DIR/venv/bin/activate"
 
-# Upgrade pip
+# Actualizar pip
 pip install --upgrade pip
 
-# Install Holehe
-echo -e "${cColorVerde}  - Installing Holehe...${cFinColor}"
+# Instalar Holehe
+echo -e "${cColorVerde}  - Instalando Holehe...${cFinColor}"
 pip install holehe
 
-# Install Maigret
-echo -e "${cColorVerde}  - Installing Maigret...${cFinColor}"
+# Instalar Maigret
+echo -e "${cColorVerde}  - Instalando Maigret...${cFinColor}"
 pip install maigret
 
-# Install Sherlock
-echo -e "${cColorVerde}  - Installing Sherlock...${cFinColor}"
+# Instalar Sherlock
+echo -e "${cColorVerde}  - Instalando Sherlock...${cFinColor}"
 pip install sherlock-project
 
-# Install Flask (for social-api-native.py)
-echo -e "${cColorVerde}  - Installing Flask...${cFinColor}"
+# Instalar Flask
+echo -e "${cColorVerde}  - Instalando Flask...${cFinColor}"
 pip install flask
 
 deactivate
 
-# 5. Fix permissions
-echo -e "${cColorVerde}[+] Setting permissions...${cFinColor}"
+# 5. Arreglar permisos
+echo -e "${cColorVerde}[+] Estableciendo permisos...${cFinColor}"
 sudo chown -R $USER:$USER "$INSTALL_DIR"
-chmod +x "$INSTALL_DIR/n8n/social-api-native.py"
+chmod +x "$INSTALL_DIR/n8n/social-api.py"
 
-echo -e "${cColorVerde}[+] Installation complete!${cFinColor}"
-echo -e "${cColorVerde}[+] Run './start-native.sh' to start the services.${cFinColor}"
+echo -e "${cColorVerde}[+] ¡Instalación completada!${cFinColor}"
+echo -e "${cColorVerde}[+] Ejecuta './start.sh' para iniciar los servicios.${cFinColor}"
