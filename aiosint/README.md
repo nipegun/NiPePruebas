@@ -9,6 +9,6 @@ Permite la extracción, análisis y reporte de huellas digitales y perfiles púb
 Para instalar y poner en marcha la herramienta ejecutamos:
 
 ```bash
-chmod +x install-native.sh && ./install-native.sh
-./start-native.sh
+chmod +x install.sh && ./install.sh
+./start.sh
 ```
