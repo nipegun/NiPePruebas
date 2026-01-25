@@ -20,12 +20,9 @@
   sudo mkdir -p /root/Software/CUDAToolkit/v11.4.4/
   sudo mv /tmp/cuda_11.4.4_470.82.01_linux.run /root/Software/CUDAToolkit/v11.4.4/installer.run
 
-# Instalar CUDA toolkit sin driver
-  # Indicar a CUDA que use la versión 11 del compilador gcc
-    export CC=/usr/bin/gcc-11
-    export CXX=/usr/bin/g++-11
-  
-  cuda_11.4.4_470.82.01_linux.run
+# Instalar sólo CUDA toolkit usando el compilador version 11
+  export CC=/usr/bin/gcc-11
+  export CXX=/usr/bin/g++-11
   sudo sh /root/Software/CUDAToolkit/v11.4.4/installer.run --toolkit --silent
 
 # Exportar variables
