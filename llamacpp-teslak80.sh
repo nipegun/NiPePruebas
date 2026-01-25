@@ -9,6 +9,19 @@
         rm -rf $HOME/Git/llama.cpp/
       git clone --depth 1 https://github.com/ggerganov/llama.cpp.git
 
+
+cd /tmp
+wget https://developer.download.nvidia.com/compute/cuda/11.4.4/local_installers/cuda_11.4.4_470.82.01_linux.run
+
+# Instalar CUDA toolkit sin driver
+  sudo sh cuda_11.4.4_470.82.01_linux.run --toolkit --silent
+
+# Exportar variables
+  export CUDA_HOME=/usr/local/cuda-11.4
+  export PATH=$CUDA_HOME/bin:$PATH
+  export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+
+
     # Instalar dependencias para compilar
       sudo apt-get -y update
       sudo apt-get -y install cmake
