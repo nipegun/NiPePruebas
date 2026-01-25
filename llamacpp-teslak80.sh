@@ -51,7 +51,10 @@ cd $HOME/Git/llama.cpp/build
   export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
   export CUDACXX=/usr/local/cuda-11.4/bin/nvcc
-
+  export CC=/usr/bin/gcc-11
+  export CXX=/usr/bin/g++-11
+  export CUDAHOSTCXX=/usr/bin/g++-11
+  
 cmake ..                      \
   -DGGML_CUDA=ON              \
   -DGGML_CUDA_FORCE=ON        \
