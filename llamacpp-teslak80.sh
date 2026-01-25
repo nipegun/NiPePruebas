@@ -19,7 +19,7 @@
   sudo mv /root/Software/CUDAToolkit/v11.4.4/cuda_11.4.4_470.82.01_linux.run /root/Software/CUDAToolkit/v11.4.4/installer.run
 
 # Instalar CUDA toolkit sin driver
-  sudo sh cuda_11.4.4_470.82.01_linux.run --toolkit --silent
+  sudo sh /root/Software/CUDAToolkit/v11.4.4/installer.run --toolkit --silent
 
 # Exportar variables
   export CUDA_HOME=/usr/local/cuda-11.4
