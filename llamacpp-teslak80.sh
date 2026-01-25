@@ -12,11 +12,9 @@
 
 # Descargar el instalador de CUDA toolkit 11.4
   cd /tmp
-  
-  sudo mkdir -p /root/Software/CUDAToolkit/v11.4.4/
-  cd /root/Software/CUDAToolkit/v11.4.4/
   sudo wget https://developer.download.nvidia.com/compute/cuda/11.4.4/local_installers/cuda_11.4.4_470.82.01_linux.run
-  sudo mv /root/Software/CUDAToolkit/v11.4.4/cuda_11.4.4_470.82.01_linux.run /root/Software/CUDAToolkit/v11.4.4/installer.run
+  sudo mkdir -p /root/Software/CUDAToolkit/v11.4.4/
+  sudo mv /tmp/cuda_11.4.4_470.82.01_linux.run /root/Software/CUDAToolkit/v11.4.4/installer.run
 
 # Instalar CUDA toolkit sin driver
   sudo sh /root/Software/CUDAToolkit/v11.4.4/installer.run --toolkit --silent
