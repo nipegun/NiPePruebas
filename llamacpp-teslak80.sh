@@ -22,15 +22,25 @@
     sudo apt-get -y install gcc-10
     sudo apt-get -y install g++-10
 
-# Configurar alternativas para compilación cuda
-  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
-  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
-  sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
-  sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12
+  # Configurar alternativas para compilación cuda
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
+    sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
+    sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12
 
-# Seleccionar gcc-10 como predeterminado
-  sudo update-alternatives --config gcc
-  sudo update-alternatives --config g++
+  # Seleccionar gcc-10 como predeterminado
+    sudo update-alternatives --config gcc
+    sudo update-alternatives --config g++
+    sudo update-alternatives --set gcc /usr/bin/gcc-10
+    sudo update-alternatives --set g++ /usr/bin/g++-10
+
+
+
+
+echo 'export PATH=/usr/local/cuda-11.4/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+source ~/.bashrc
+
 
 
 
