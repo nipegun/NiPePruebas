@@ -9,10 +9,17 @@
         rm -rf $HOME/Git/llama.cpp/
       git clone --depth 1 https://github.com/ggerganov/llama.cpp.git
 
+# Desisntalar la vesión actual del compilador gcc
+  sudo apt-get -y autoremove --purge gcc
+
 # Instalar la versión 11 del compilador cpp
   sudo apt-get -y update
   sudo apt-get -y install gcc-11
   sudo apt-get -y install 'g++-11'
+
+# Enlazar el compilador 11 a los binarios por defecto de gcc
+  sudo ln -sf /usr/bin/gcc-11 /usr/bin/gcc
+  sudo ln -sf /usr/bin/g++-11 /usr/bin/g++
 
 # Descargar el instalador de CUDA toolkit 11.4
   cd /tmp
