@@ -7,15 +7,13 @@
   sudo apt-get -y install libcurl4-openssl-dev
   sudo apt-get -y install ccache
   sudo apt-get -y install libncurses-dev
+  sudo apt-get -y install libssl-dev
 
 # Instalar gcc version 10
-
   # Desisntalar la vesión actual del compilador gcc
     #sudo apt-get -y autoremove --purge gcc g++ gcc-11 g++-11 
-
   # Añadir repositorio de Debian 11
     echo "deb http://deb.debian.org/debian bullseye main" | sudo tee /etc/apt/sources.list.d/bullseye.list
-
   # Crear archivo de preferencias para evitar conflictos
     echo 'Package: *'                                                   | sudo tee    /etc/apt/preferences.d/bullseye
     echo 'Pin: release n=bullseye'                                      | sudo tee -a /etc/apt/preferences.d/bullseye
@@ -24,12 +22,10 @@
     echo 'Package: gcc-10 g++-10 cpp-10 libgcc-10-dev libstdc++-10-dev' | sudo tee -a /etc/apt/preferences.d/bullseye
     echo 'Pin: release n=bullseye'                                      | sudo tee -a /etc/apt/preferences.d/bullseye
     echo 'Pin-Priority: 500'                                            | sudo tee -a /etc/apt/preferences.d/bullseye
-
   # Instalar gcc 10
     sudo apt-get -y update
     sudo apt-get -y install gcc-10
     sudo apt-get -y install g++-10
-
   # Configurar alternativas para compilación cuda
     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
@@ -37,13 +33,11 @@
     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12
 
 # Instalar cuda toolkit 11.4
-
   # Descargar el instalador
     cd /tmp
     sudo wget https://developer.download.nvidia.com/compute/cuda/11.4.4/local_installers/cuda_11.4.4_470.82.01_linux.run
     sudo mkdir -p /root/Software/CUDAToolkit/v11.4.4/
     sudo mv /tmp/cuda_11.4.4_470.82.01_linux.run /root/Software/CUDAToolkit/v11.4.4/installer.run
-
   # Instalar
     # Seleccionar gcc-10 como predeterminado
       sudo update-alternatives --set gcc /usr/bin/gcc-10
