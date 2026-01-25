@@ -149,8 +149,9 @@
         -DCMAKE_CXX_COMPILER=g++-10                         \
         -DCMAKE_CUDA_FLAGS="-Wno-deprecated-gpu-targets"    \
         -DCMAKE_CXX_FLAGS="-march=ivybridge -mtune=ivybridge -O3"
-      export CUDA_NVCC_FLAGS="-Wno-deprecated-gpu-targets"
-      cmake --build . --config Release -- -j$(nproc) -Wno-deprecated-gpu-targets
+      #export CUDA_NVCC_FLAGS="-Wno-deprecated-gpu-targets"
+      cmake --build . --config Release -- -j$(nproc)
+      #make NVCCFLAGS="-Wno-deprecated-gpu-targets" -j$(nproc)
 
     # Crear carpeta
       mkdir -p $HOME/IA/LlamaCPP/ 2> /dev/null
