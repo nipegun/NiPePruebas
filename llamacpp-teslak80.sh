@@ -1,5 +1,33 @@
 #!/bin/bash
 
+# Instalar gcc version 10
+
+  # Desisntalar la vesión actual del compilador gcc
+    sudo apt-get -y autoremove --purge gcc g++ gcc-11 g++-11 
+
+  # Añadir repositorio de Debian 11
+    echo "deb http://deb.debian.org/debian bullseye main" | sudo tee /etc/apt/sources.list.d/bullseye.list
+
+  # Crear archivo de preferencias para evitar conflictos
+    echo 'Package: *'                                                   | sudo tee    /etc/apt/preferences.d/bullseye
+    echo 'Pin: release n=bullseye'                                      | sudo tee -a /etc/apt/preferences.d/bullseye
+    echo 'Pin-Priority: 100'                                            | sudo tee -a /etc/apt/preferences.d/bullseye
+    echo ''                                                             | sudo tee -a /etc/apt/preferences.d/bullseye
+    echo 'Package: gcc-10 g++-10 cpp-10 libgcc-10-dev libstdc++-10-dev' | sudo tee -a /etc/apt/preferences.d/bullseye
+    echo 'Pin: release n=bullseye'                                      | sudo tee -a /etc/apt/preferences.d/bullseye
+    echo 'Pin-Priority: 500'                                            | sudo tee -a /etc/apt/preferences.d/bullseye
+
+  # Instalar gcc 10
+    sudo apt-get -y update
+    sudo apt-get -y isntall gcc-10
+    sudo apt-get -y install g++-10
+
+
+
+
+
+
+
     # Crear carpeta de Git
       mkdir -p $HOME/Git/ 2> /dev/null
 
@@ -9,8 +37,7 @@
         rm -rf $HOME/Git/llama.cpp/
       git clone --depth 1 https://github.com/ggerganov/llama.cpp.git
 
-# Desisntalar la vesión actual del compilador gcc
-  sudo apt-get -y autoremove --purge gcc g++ gcc-11 g++-11 
+
 
 # Instalar la versión 11 del compilador cpp
   sudo apt-get -y update
@@ -68,20 +95,6 @@ cmake --build . --config Release -- -j$(nproc)
 
 
 
-
-
-
-# Añadir repositorio de Debian 11
-  echo "deb http://deb.debian.org/debian bullseye main" | sudo tee /etc/apt/sources.list.d/bullseye.list
-
-# Crear archivo de preferencias para evitar conflictos
-  echo 'Package: *'                                                   | tee    /etc/apt/preferences.d/bullseye
-  echo 'Pin: release n=bullseye'                                      | tee -a /etc/apt/preferences.d/bullseye
-  echo 'Pin-Priority: 100'                                            | tee -a /etc/apt/preferences.d/bullseye
-  echo ''                                                             | tee -a /etc/apt/preferences.d/bullseye
-  echo 'Package: gcc-10 g++-10 cpp-10 libgcc-10-dev libstdc++-10-dev' | tee -a /etc/apt/preferences.d/bullseye
-  echo 'Pin: release n=bullseye'                                      | tee -a /etc/apt/preferences.d/bullseye
-  echo 'Pin-Priority: 500'                                            | tee -a /etc/apt/preferences.d/bullseye
 
 
 
